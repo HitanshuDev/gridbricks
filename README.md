@@ -145,7 +145,7 @@ No public deployment has been performed by this implementation. No deployment UR
 1. Push this directory to a GitHub repository.
 2. Create a Render Blueprint from `render.yaml`, or create a Python web service with root directory `backend`, build command `pip install -r requirements.txt`, start command `uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers`, and health path `/api/health`.
 3. Set `CORS_ORIGINS` to the exact Vercel app origin (comma-separated, no wildcard). Set `DATA_MODE=elexon`.
-4. For durable caching/imports, attach a persistent disk at `/var/data`; set `DATA_DIR=/var/data` and `CSV_DIR=/var/data/imports`. Without a persistent disk, local cache files may be lost on restart.
+4. If you attach a Render persistent disk, mount it at `/var/data` and set `DATA_DIR=/var/data` and `CSV_DIR=/var/data/imports`. Do not set either variable to `/var/data` unless the disk is actually attached. Without a persistent disk, WindScope uses writable app storage and its cache may be lost on restart; if the configured path is not writable, startup logs a warning and falls back to ephemeral app storage.
 5. Verify `https://<your-render-service>/api/health` and `/docs`.
 
 ### Frontend on Vercel
