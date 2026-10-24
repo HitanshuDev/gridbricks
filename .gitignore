@@ -1,0 +1,17 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+.venv/
+.venv*/
+venv/
+node_modules/
+frontend/dist/
+backend/data/cache/*
+backend/data/imports/*
+!backend/data/cache/.gitkeep
+!backend/data/imports/.gitkeep

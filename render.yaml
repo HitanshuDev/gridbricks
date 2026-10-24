@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: windscope-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATA_MODE
+        value: elexon
+      - key: DATA_DIR
+        value: /var/data
+      - key: CSV_DIR
+        value: /var/data/imports
+      - key: CORS_ORIGINS
+        sync: false
+      - key: API_TIMEOUT_SECONDS
+        value: "30"
+      - key: API_MAX_RETRIES
+        value: "4"
