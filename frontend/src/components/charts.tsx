@@ -34,8 +34,8 @@ export function ForecastActualChart({ rows }: { rows: Interval[] }) {
         <XAxis dataKey="time" tick={axis} minTickGap={40} tickLine={false} axisLine={false} />
         <YAxis tick={axis} tickLine={false} axisLine={false} tickFormatter={(v: number) => `${Math.round(v / 1000)}k`} />
         <Tooltip contentStyle={tooltipStyle} formatter={(value) => [mw(Number(value)), ""]} />
-        <Line type="monotone" dataKey="forecast_mw" name="Forecast" stroke="#16805c" strokeWidth={2} dot={false} connectNulls={false} />
-        <Line type="monotone" dataKey="actual_mw" name="Actual" stroke="#31483d" strokeWidth={1.7} dot={false} connectNulls={false} />
+        <Line type="linear" dataKey="forecast_mw" name="Forecast" stroke="#16805c" strokeWidth={2} dot={false} connectNulls />
+        <Line type="linear" dataKey="actual_mw" name="Actual" stroke="#31483d" strokeWidth={1.7} dot={false} connectNulls />
         <Legend wrapperStyle={{ fontSize: 10, paddingTop: 8 }} />
       </LineChart>
     </ResponsiveContainer>
@@ -55,7 +55,7 @@ export function ErrorChart({ rows }: { rows: Interval[] }) {
         <YAxis tick={axis} tickLine={false} axisLine={false} tickFormatter={(v: number) => `${Math.round(v / 1000)}k`} />
         <ReferenceLine y={0} stroke="#9ca9a0" strokeDasharray="3 3" />
         <Tooltip contentStyle={tooltipStyle} formatter={(value) => [value == null ? "N/A" : mw(Number(value)), "Forecast − actual"]} />
-        <Line type="monotone" dataKey="error" stroke="#d88b35" strokeWidth={1.8} dot={false} connectNulls={false} />
+        <Line type="linear" dataKey="error" stroke="#d88b35" strokeWidth={1.8} dot={false} connectNulls />
       </ComposedChart>
     </ResponsiveContainer>
   );

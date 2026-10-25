@@ -177,8 +177,8 @@ function OverviewPage() {
           <MetricCard label="Mean absolute error" value={data.metrics.mae_mw == null ? "N/A" : Math.round(data.metrics.mae_mw).toLocaleString()} unit="MW" detail={`${data.metrics.valid_pairs.toLocaleString()} valid aligned pairs`} accent />
         </div>
         <div className="mt-5 grid gap-5 xl:grid-cols-[1.65fr_1fr]">
-          <Panel title="Forecast vs actual" subtitle="Source delivery resolution · exact timestamps in UTC; no interpolation">{data.intervals.some((row) => row.forecast_mw != null || row.actual_mw != null) ? <ForecastActualChart rows={data.intervals} /> : <EmptyState message="No forecast or actual observations are available in this date range." />}</Panel>
-          <Panel title="Forecast error over time" subtitle="Error = forecast − actual · positive values indicate over-forecast">{data.intervals.some((row) => row.error_mw != null) ? <ErrorChart rows={data.intervals} /> : <EmptyState message="Error is unavailable until forecasts and actuals can be aligned." />}</Panel>
+          <Panel title="Forecast vs actual" subtitle="Exact UTC delivery timestamps · lines connect observed values across source cadences">{data.intervals.some((row) => row.forecast_mw != null || row.actual_mw != null) ? <ForecastActualChart rows={data.intervals} /> : <EmptyState message="No forecast or actual observations are available in this date range." />}</Panel>
+          <Panel title="Forecast error over time" subtitle="Error = forecast − actual · valid paired points connected across source cadences">{data.intervals.some((row) => row.error_mw != null) ? <ErrorChart rows={data.intervals} /> : <EmptyState message="Error is unavailable until forecasts and actuals can be aligned." />}</Panel>
         </div>
         <div className="mt-5 grid gap-4 sm:grid-cols-3">
           <MetricCard label="RMSE" value={data.metrics.rmse_mw == null ? "N/A" : Math.round(data.metrics.rmse_mw).toLocaleString()} unit="MW" detail="Root mean squared error; larger errors weigh more." />
